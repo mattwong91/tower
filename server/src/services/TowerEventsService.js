@@ -33,6 +33,9 @@ class TowerEventsService {
       throw new Forbidden('You do not own this event. Cannot make changes.')
     }
 
+    if (towerEvent.isCanceled) {
+      throw new BadRequest('This event is cancelled. Cannot make changes.')
+    }
     const keys = Object.keys(towerEventData)
     keys.forEach(key => {
       if (key == 'isCanceled') {
