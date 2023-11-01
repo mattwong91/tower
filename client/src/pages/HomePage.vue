@@ -1,6 +1,6 @@
 <template>
 <div class="container-fluid">
-  <!-- SECTION HEADER IMAGE AREA, LOGO -->
+  <!-- SECTION HEADER IMAGE AREA -->
   <section class="row">
     
   </section>

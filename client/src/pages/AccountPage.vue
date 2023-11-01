@@ -1,9 +1,17 @@
 <template>
-  <div class="about text-center">
-    <h1>Welcome {{ account.name }}</h1>
-    <img class="rounded" :src="account.picture" alt="" />
-    <p>{{ account.email }}</p>
-  </div>
+<div class="container-fluid">
+  <!-- SECTION MY EVENTS TO ATTEND -->
+  <section class="row">
+    <!-- TODO EVENT CARDS GO HERE -->
+  </section>
+  <!-- !SECTION MY EVENTS TO ATTEND -->
+
+  <!-- SECTION MY TICKETS -->
+  <section class="row">
+    
+  </section>
+  <!-- !SECTION MY TICKETS -->
+</div>
 </template>
 
 <script>
