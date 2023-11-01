@@ -3,7 +3,7 @@ import { Forbidden } from "../utils/Errors.js"
 
 class TicketsService {
   async getTicketsForEventById(eventId) {
-    const tickets = await dbContext.Tickets.find({ eventId: eventId }).populate('profile')
+    const tickets = await dbContext.Tickets.find({ eventId: eventId }).populate('profile', 'name picture')
     return tickets
   }
   async getMyTickets(userId) {
