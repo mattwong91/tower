@@ -25,10 +25,7 @@
   <!-- SECTION EVENT CARDS -->
   <section class="row my-2">
     <div v-for="towerEvent in towerEvents" :key="towerEvent.id" class="col-6 col-md-3 my-2">
-      <div class="card event-card">
-        <img class="img-fluid" :src="towerEvent.coverImg" :title="towerEvent.name" :alt="towerEvent.name">
-        <p class="p-2">{{ towerEvent.name }}</p>
-      </div>
+      <EventCard :towerEvent="towerEvent" />
     </div>
   </section>
   <!-- !SECTION EVENT CARDS -->
@@ -40,43 +37,48 @@ import { computed, onMounted, ref } from "vue";
 import Pop from "../utils/Pop";
 import {towerEventsService} from "../services/TowerEventsService.js"
 import { AppState } from "../AppState";
+import EventCard from "../components/EventCard.vue";
 
 export default {
-  setup() {
-    const eventTypes = ['concert', 'convention', 'sport', 'digital']
-    const filteredType = ref('')
-    onMounted(()=>{
-      getTowerEvents()
-    })
-    async function getTowerEvents(){
-      try {
-        await towerEventsService.getTowerEvents()
-      } 
-      catch (error) {
-        Pop.error(error)
-      }
-    }
-    return {
-      eventTypes,
-      filteredType,
-      towerEvents: computed(() => {
-        if(filteredType.value){
-          return AppState.towerEvents.filter(towerEvent => towerEvent.type == filteredType.value)
+    setup() {
+        const eventTypes = ['concert', 'convention', 'sport', 'digital'];
+        const filteredType = ref('');
+        onMounted(() => {
+            getTowerEvents();
+        });
+        async function getTowerEvents() {
+            try {
+                await towerEventsService.getTowerEvents();
+            }
+            catch (error) {
+                Pop.error(error);
+            }
         }
-        else{
-          return AppState.towerEvents
-        }
-      }),
-      filterType(eventType){
-        filteredType.value = eventType
-      }
-    }
-  }
+        return {
+            eventTypes,
+            filteredType,
+            towerEvents: computed(() => {
+                if (filteredType.value) {
+                    return AppState.towerEvents.filter(towerEvent => towerEvent.type == filteredType.value);
+                }
+                else {
+                    return AppState.towerEvents;
+                }
+            }),
+            filterType(eventType) {
+                filteredType.value = eventType;
+            }
+        };
+    },
+    components: { EventCard }
 }
 </script>
 
 <style scoped lang="scss">
-.event-card{
-  min-height: 30vh;
+// .event-card{
+//   min-height: 30vh;
+// }
+img{
+  height: 20vh;
 }
 </style>
