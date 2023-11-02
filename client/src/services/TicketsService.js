@@ -15,6 +15,13 @@ class TicketsService{
     logger.log('[TICKET SERVICE] DELETED TICKET: ', response.data)
     AppState.tickets = AppState.tickets.filter(ticket => ticket.id != ticketId)
   }
+
+  async getTicketsByEventId(eventId){
+    const response = await api.get(`api/events/${eventId}/tickets`)
+    logger.log('[TICKET SERVICE] GET TICKETS BY EVENT ID: ', response.data)
+    const tickets = response.data.map(obj => new Ticket(obj))
+    AppState.tickets = tickets
+  }
 }
 
 export const ticketsService = new TicketsService()

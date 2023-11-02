@@ -3,7 +3,6 @@
   <!-- SECTION MY EVENTS TO ATTEND -->
   <section class="row p-5">
     <h2>My Events</h2>
-    <!-- TODO EVENT CARDS GO HERE -->
     <div v-for="towerEvent in towerEvents" :key="towerEvent.id" class="col-6 col-md-3 my-2">
       <EventCard :towerEvent="towerEvent" />
     </div>
