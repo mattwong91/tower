@@ -3,12 +3,33 @@
   <!-- SECTION EVENT DETAIL CARD -->
   <section class="row p-3 p-md-5">
     <div v-if="activeEvent" class="col-12 rounded shadow border border-dark p-3">
-      <img class="img-fluid" :src="activeEvent.coverImg" :alt="activeEvent.name">
-      <h4>{{ activeEvent.name }}</h4>
-      <p>{{ activeEvent.location }}</p>
-      <p>{{ activeEvent.startDate.toLocaleString() }}</p>
-      <p>{{ activeEvent.description }}</p>
-      <p>{{ activeEvent.capacity - activeEvent.ticketCount }} Spots available</p>
+      <section class="row">
+        <img class="img-fluid" :src="activeEvent.coverImg" :alt="activeEvent.name">
+        <div class="d-flex justify-content-between">
+          <div v-if="activeEvent.isCanceled" class="my-3">
+            <s>{{ activeEvent.name }}</s>
+            <p class="text-danger">This event has been cancelled</p>
+          </div>
+          <div v-else>
+            <h4 class="my-3">{{ activeEvent.name }}</h4>
+          </div>
+          <div>
+            <p class="text-primary my-3">You are attending this event</p>
+          </div>
+        </div>
+        <div class="my-3">
+          <p>{{ activeEvent.location }}</p>
+          <p>{{ activeEvent.startDate.toLocaleString() }}</p>
+        </div>
+        <p>{{ activeEvent.description }}</p>
+        <div class="text-end my-2">
+          <p v-if="activeEvent.isCanceled">0 spots available</p>
+          <p v-else>{{ activeEvent.availability }} spots available</p>
+          <button v-if="activeEvent.availability == 0" disabled class="btn btn-danger">Sold Out</button>
+          <button v-else-if="activeEvent.isCanceled" disabled class="btn btn-warning">Event Cancelled</button>
+          <button v-else @click="createTicket()" class="btn btn-success">Attend</button>
+        </div>
+      </section>
     </div>
     <div v-else class="col-12 text-center p-5">
       <div class="spinner-border" role="status"></div>
@@ -20,9 +41,11 @@
   <!-- SECTION USERS THAT ARE ATTENDING -->
   <section class="row p-3 p-md-5">
     <div class="col-12 bg-dark rounded d-flex">
-      <div v-for="ticket in tickets" :key="ticket.id" class="p-2">
-        <img class="img-fluid rounded-circle" :src="ticket.profile.picture"  :title="ticket.profile.name" alt="Profile Picture">
-      </div>
+      <section class="row">
+        <div v-for="ticket in tickets" :key="ticket.id" class="col-2 col-md-1 p-2">
+          <img class="img-fluid rounded-circle" :src="ticket.profile.picture"  :title="ticket.profile.name" alt="Profile Picture">
+        </div>
+      </section>
     </div>
   </section>
   <!-- !SECTION USERS THAT ARE ATTENDING -->
@@ -51,7 +74,7 @@
 
 <script>
 import { AppState } from '../AppState';
-import { computed, onMounted } from 'vue';
+import { computed, onMounted, watchEffect } from 'vue';
 import Pop from "../utils/Pop";
 import { useRoute } from "vue-router";
 import { towerEventsService } from "../services/TowerEventsService.js";
@@ -69,7 +92,6 @@ export default {
       getTowerEventById()
       getTicketsByEventId()
       getCommentsByEventId()
-
     })
     async function getTowerEventById(){
       try {
@@ -98,7 +120,16 @@ export default {
     return {
       activeEvent: computed(() => AppState.activeEvent),
       tickets: computed(() => AppState.tickets),
-      comments: computed(() =>  AppState.comments)
+      comments: computed(() =>  AppState.comments),
+      async createTicket(){
+        try {
+          await ticketsService.createTicket(eventId)
+          await towerEventsService.getTowerEventById(eventId)
+        } 
+        catch (error) {
+          Pop.error(error)
+        }
+      }
     }
   },
   components:{ CommentComponent, PostComment }

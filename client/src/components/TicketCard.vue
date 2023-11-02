@@ -1,5 +1,5 @@
 <template>
-<section class="row rounded shadow border border-dark">
+<section v-if="ticket" class="row rounded shadow border border-dark">
   <div class="col-4 p-0">
     <img class="img-fluid rounded-start h-100" :src="ticket.event.coverImg" :alt="ticket.event.name">
   </div>

@@ -1,7 +1,7 @@
 <template>
-<div class="container-fluid">
+<div v-if="account" class="container-fluid">
   <!-- SECTION MY EVENTS TO ATTEND -->
-  <section class="row p-5">
+  <section v-if="towerEvents" class="row p-5">
     <h2>My Events</h2>
     <div v-for="towerEvent in towerEvents" :key="towerEvent.id" class="col-6 col-md-3 my-2">
       <EventCard :towerEvent="towerEvent" />
@@ -10,7 +10,7 @@
   <!-- !SECTION MY EVENTS TO ATTEND -->
 
   <!-- SECTION MY TICKETS -->
-  <section class="row p-5">
+  <section v-if="tickets" class="row p-5">
     <h2>My Tickets</h2>
     <div v-for="ticket in tickets" :key="ticket.id" class="col-12 my-2">
       <TicketCard :ticket="ticket" />

@@ -2,6 +2,7 @@ import { AppState } from "../AppState"
 import { Ticket } from "../models/Ticket"
 import { logger } from "../utils/Logger"
 import { api } from "./AxiosService"
+import { towerEventsService } from "./TowerEventsService"
 
 class TicketsService{
 
@@ -21,6 +22,13 @@ class TicketsService{
     logger.log('[TICKET SERVICE] GET TICKETS BY EVENT ID: ', response.data)
     const tickets = response.data.map(obj => new Ticket(obj))
     AppState.tickets = tickets
+  }
+
+  async createTicket(eventId){
+    const response = await api.post('api/tickets', {eventId})
+    logger.log('[TICKET SERVICE] CREATE TICKET: ', response.data)
+    const ticket = new Ticket(response.data)
+    AppState.tickets.push(ticket)
   }
 }
 

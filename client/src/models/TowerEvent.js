@@ -12,5 +12,14 @@ export class TowerEvent{
     this.type = data.type
     this.creator = data.creator
     this.ticketCount = data.ticketCount
+    this.availability = this.computeAvailability
+  }
+
+  get computeAvailability(){
+    const availability = this.capacity - this.ticketCount
+    if(availability < 0){
+      return 0
+    }
+    return availability
   }
 }
