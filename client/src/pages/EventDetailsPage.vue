@@ -31,21 +31,12 @@
   <section class="row p-3 p-md-5 justify-content-center">
     <div class="col-12 col-md-10 p-4 rounded shadow border border-dark">
       <!-- SECTION POST FORM -->
-      <section class="row">
-        <div class="col-12">
-          <form>
-            <textarea name="commentBody" id="commentBody" class="form-control pb-5 mb-2" placeholder="Post a comment..."></textarea>
-            <div class="text-end">
-              <button class="btn btn-dark">Post Comment</button>
-            </div>
-          </form>
-        </div>
-      </section>
+      <PostComment/>
       <!-- !SECTION POST FORM -->
 
         <!-- SECTION ALL COMMENTS -->
         <section class="row">
-          <div v-for="comment in comments" :key="comment.id" class="col-12">
+          <div v-for="comment in comments" :key="comment.id" class="col-12 my-2">
             <CommentComponent :comment="comment" />
           </div>
         </section>
@@ -67,6 +58,7 @@ import { towerEventsService } from "../services/TowerEventsService.js";
 import { ticketsService } from "../services/TicketsService.js";
 import {commentsService} from "../services/CommentsService.js"
 import CommentComponent from "../components/CommentComponent.vue";
+import PostComment from "../components/PostComment.vue"
 
 export default {
   setup(){
@@ -109,7 +101,7 @@ export default {
       comments: computed(() =>  AppState.comments)
     }
   },
-  components:{ CommentComponent }
+  components:{ CommentComponent, PostComment }
 };
 </script>
 
