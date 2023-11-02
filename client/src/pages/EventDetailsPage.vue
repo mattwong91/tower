@@ -1,8 +1,9 @@
+<!-- TODO DETERMINE IF I AM ATTENDING THE EVENT -->
 <template>
 <div class="container-fluid">
   <!-- SECTION EVENT DETAIL CARD -->
-  <section class="row p-3 p-md-5">
-    <div v-if="activeEvent" class="col-12 rounded shadow border border-dark p-3">
+  <section class="row p-3 p-md-5 justify-content-center">
+    <div v-if="activeEvent" class="col-12 col-md-10 rounded shadow border border-dark p-3">
       <section class="row">
         <img class="img-fluid" :src="activeEvent.coverImg" :alt="activeEvent.name">
         <div class="d-flex justify-content-between">
@@ -13,7 +14,7 @@
           <div v-else>
             <h4 class="my-3">{{ activeEvent.name }}</h4>
           </div>
-          <div>
+          <div v-if="tickets.find(ticket => ticket.accountId == account.id)">
             <p class="text-primary my-3">You are attending this event</p>
           </div>
         </div>
@@ -39,11 +40,11 @@
   <!-- !SECTION EVENT DETAIL CARD -->
 
   <!-- SECTION USERS THAT ARE ATTENDING -->
-  <section class="row p-3 p-md-5">
-    <div class="col-12 bg-dark rounded d-flex">
+  <section v-if="tickets" class="row px-3 px-md-5 justify-content-center">
+    <div class="col-12 col-md-10 bg-dark rounded d-flex">
       <section class="row">
-        <div v-for="ticket in tickets" :key="ticket.id" class="col-2 col-md-1 p-2">
-          <img class="img-fluid rounded-circle" :src="ticket.profile.picture"  :title="ticket.profile.name" alt="Profile Picture">
+        <div v-for="ticket in tickets" :key="ticket.id" class="col-auto p-2">
+          <img class="img-fluid rounded-circle attendee-img" :src="ticket.profile.picture"  :title="ticket.profile.name" alt="Profile Picture">
         </div>
       </section>
     </div>
@@ -74,7 +75,7 @@
 
 <script>
 import { AppState } from '../AppState';
-import { computed, onMounted, watchEffect } from 'vue';
+import { computed, onMounted } from 'vue';
 import Pop from "../utils/Pop";
 import { useRoute } from "vue-router";
 import { towerEventsService } from "../services/TowerEventsService.js";
@@ -118,6 +119,7 @@ export default {
       }
     }
     return {
+      account: computed(() => AppState.account),
       activeEvent: computed(() => AppState.activeEvent),
       tickets: computed(() => AppState.tickets),
       comments: computed(() =>  AppState.comments),
@@ -140,5 +142,9 @@ export default {
 <style lang="scss" scoped>
 p{
   margin-bottom: 0;
+}
+.attendee-img{
+  height: 4vh;
+  width: 4vh;
 }
 </style>
