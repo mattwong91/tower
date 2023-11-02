@@ -32,6 +32,8 @@ import EventCard from "../components/EventCard.vue";
 export default {
     setup() {
         onMounted(() => {
+          ticketsService.clearData()
+          towerEventsService.clearData()
           getMyTickets();
           getMyEvents();
         });

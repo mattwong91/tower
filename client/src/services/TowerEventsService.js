@@ -12,8 +12,9 @@ class TowerEventsService {
 
   async getMyEvents(){
     const response = await api.get('api/events')
-    const towerEvents = response.data.map(obj => new TowerEvent(obj))
-    AppState.towerEvents = towerEvents.filter(towerEvent => towerEvent.creatorId == AppState.account.id)
+    let towerEvents = response.data.map(obj => new TowerEvent(obj))
+    towerEvents = towerEvents.filter(towerEvent => towerEvent.creatorId == AppState.account.id)
+    AppState.towerEvents = towerEvents
     logger.log('[TOWER EVENTS SERVICE] GET MY EVENTS: ', AppState.towerEvents)
   }
 
@@ -21,6 +22,14 @@ class TowerEventsService {
     const response = await api.get(`api/events/${eventId}`)
     logger.log('[TOWER EVENTS SERVICE] GOT EVENT BY ID: ', response.data)
     AppState.activeEvent = new TowerEvent(response.data)
+  }
+
+  async createEvent(eventData){
+    const response = await api.post('api/events', eventData)
+    logger.log('[TOWER EVENTS SERVICE] CREATED EVENT: ', response.data)
+    const newEvent = new TowerEvent(response.data)
+    AppState.towerEvents.push(newEvent)
+    return newEvent
   }
 
   clearData(){

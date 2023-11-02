@@ -44,7 +44,8 @@ export default {
         const eventTypes = ['concert', 'convention', 'sport', 'digital'];
         const filteredType = ref('');
         onMounted(() => {
-            getTowerEvents();
+          towerEventsService.clearData()
+          getTowerEvents();
         });
         async function getTowerEvents() {
             try {

@@ -25,6 +25,9 @@ class CommentsService {
     AppState.comments.splice(commentIndex, 1)
   }
 
+  clearData(){
+    AppState.comments = []
+  }
 }
 
 export const commentsService = new CommentsService()

@@ -90,6 +90,8 @@ export default {
     const eventId = route.params.eventId
     onMounted(() => {
       towerEventsService.clearData()
+      ticketsService.clearData()
+      commentsService.clearData()
       getTowerEventById()
       getTicketsByEventId()
       getCommentsByEventId()
