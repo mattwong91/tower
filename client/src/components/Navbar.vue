@@ -1,9 +1,9 @@
 <template>
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark px-3">
+  <nav class="navbar navbar-expand-lg navbar-dark bg-main px-3">
     <router-link class="navbar-brand d-flex" :to="{ name: 'Home' }">
       <div class="d-flex flex-column align-items-center">
         <!-- TODO CHANGE TO A LOGO -->
-        <h1>HOME</h1>
+        <h1 class="title">Tower</h1>
       </div>
     </router-link>
     
@@ -44,6 +44,14 @@ a:hover {
   border-bottom: 2px solid var(--bs-success);
   border-bottom-left-radius: 0;
   border-bottom-right-radius: 0;
+}
+
+.bg-main{
+  background-color: #094567;
+}
+.title:hover{
+  text-shadow: 0px 0px 10px black;
+  transition: ease-in-out 0.3s;
 }
 
 @media screen and (min-width: 768px) {

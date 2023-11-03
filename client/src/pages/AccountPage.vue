@@ -1,18 +1,18 @@
 <template>
-<div v-if="account" class="container-fluid">
+<div v-if="account.id" class="container-fluid">
   <!-- SECTION MY EVENTS TO ATTEND -->
-  <section v-if="towerEvents" class="row p-5">
+  <section v-if="myTowerEvents" class="row my-2">
     <h2>My Events</h2>
-    <div v-for="towerEvent in towerEvents" :key="towerEvent.id" class="col-6 col-md-3 my-2">
+    <div v-for="towerEvent in myTowerEvents" :key="towerEvent.id" class="col-6 col-md-3 col-xl-2 my-2">
       <EventCard :towerEvent="towerEvent" />
     </div>
   </section>
   <!-- !SECTION MY EVENTS TO ATTEND -->
 
   <!-- SECTION MY TICKETS -->
-  <section v-if="tickets" class="row p-5">
+  <section v-if="myTickets" class="row my-2 p-2 justify-content-center">
     <h2>My Tickets</h2>
-    <div v-for="ticket in tickets" :key="ticket.id" class="col-12 my-2">
+    <div v-for="ticket in myTickets" :key="ticket.id" class="col-12 col-md-10 col-xl-8 my-2">
       <TicketCard :ticket="ticket" />
     </div>
   </section>
@@ -28,6 +28,7 @@ import {ticketsService} from "../services/TicketsService.js"
 import TicketCard from "../components/TicketCard.vue";
 import { towerEventsService } from "../services/TowerEventsService";
 import EventCard from "../components/EventCard.vue";
+import { AuthService } from "../services/AuthService";
 
 export default {
     setup() {
@@ -47,7 +48,8 @@ export default {
         }
         async function getMyEvents(){
           try {
-            await towerEventsService.getMyEvents();
+            const userId = AuthService.userInfo.id
+            await towerEventsService.getMyEvents(userId);
           }
           catch (error) {
             Pop.error(error)
@@ -55,8 +57,8 @@ export default {
         }
         return {
             account: computed(() => AppState.account),
-            tickets: computed(() => AppState.tickets),
-            towerEvents: computed(() => AppState.towerEvents)
+            myTickets: computed(() => AppState.myTickets),
+            myTowerEvents: computed(() => AppState.myTowerEvents)
         };
     },
     components: { TicketCard, EventCard }

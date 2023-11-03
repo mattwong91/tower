@@ -7,9 +7,9 @@
   <!-- !SECTION HEADER IMAGE AREA, LOGO -->
 
   <!-- SECTION FILTER BAR -->
-  <section class="row p-3 bg-dark justify-content-around mt-3">
-
-
+  <section class="row p-3 mt-3">
+    <div class="col-12 bg-main rounded">
+      <section class="row justify-content-around">
         <div class="col-12 col-md-2">
           <button @click="filterType('')" class="btn btn-light w-100 my-2 mx-md-2">ALL</button>
         </div>
@@ -18,13 +18,14 @@
             {{ eventType.toUpperCase() }}
           </button>
         </div>
-
+      </section>
+    </div>
   </section>
   <!-- !SECTION FILTER BAR -->
 
   <!-- SECTION EVENT CARDS -->
   <section class="row my-2">
-    <div v-for="towerEvent in towerEvents" :key="towerEvent.id" class="col-6 col-md-3 my-2">
+    <div v-for="towerEvent in towerEvents" :key="towerEvent.id" class="col-6 col-md-3 col-xl-2 my-2">
       <EventCard :towerEvent="towerEvent" />
     </div>
   </section>
@@ -81,5 +82,9 @@ export default {
 // }
 img{
   height: 20vh;
+}
+
+.bg-main{
+  background-color: #094567;
 }
 </style>

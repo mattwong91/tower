@@ -1,13 +1,15 @@
 <template>
 <section v-if="ticket" class="row rounded shadow border border-dark">
-  <div class="col-4 p-0">
-    <img class="img-fluid rounded-start h-100" :src="ticket.event.coverImg" :alt="ticket.event.name">
+  <div class="col-12 col-md-4 p-0">
+    <router-link :to="{name: 'EventDetails', params: {eventId: ticket.eventId}}">
+      <img class="img-fluid rounded-start h-100" :src="ticket.event.coverImg" :alt="ticket.event.name">
+    </router-link>
   </div>
-  <div class="col-8 p-4">
-    <h5 class="mb-4">{{ ticket.event.name }}</h5>
+  <div class="col-12 col-md-8 p-2 p-md-4">
+    <h5 class="my-2">{{ ticket.event.name }}</h5>
     <p>{{ ticket.event.location }}</p>
-    <p class="mb-5">{{ ticket.event.startDate }}</p>
-    <div class="text-end">
+    <p>{{ ticket.event.startDate.substring(0,10) }}</p>
+    <div class="text-end mt-3 mt-md-5">
       <button @click="deleteTicket(ticket.id)" class="btn btn-danger">Unattend</button>
     </div>
   </div>
@@ -46,5 +48,7 @@ export default {
 
 
 <style lang="scss" scoped>
-
+p{
+  margin-bottom: 0;
+}
 </style>

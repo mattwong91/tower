@@ -9,9 +9,9 @@
         New Event
       </button>
       <div class="dropdown my-2 my-lg-0">
-        <div type="button" class="bg-dark border-0 selectable no-select" data-bs-toggle="dropdown" aria-expanded="false">
+        <div type="button" class="bg-main border-0 selectable no-select" data-bs-toggle="dropdown" aria-expanded="false">
           <div v-if="account.picture || user.picture">
-            <img :src="account.picture || user.picture" alt="account photo" height="40" class="rounded" />
+            <img :src="account.picture || user.picture" alt="account photo" height="40" class="rounded-circle" />
           </div>
         </div>
         <div class="dropdown-menu dropdown-menu-lg-end dropdown-menu-start p-0" aria-labelledby="authDropdown">
@@ -52,4 +52,8 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.bg-main{
+  background-color: #094567;
+}
+</style>

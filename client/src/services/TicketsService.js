@@ -7,13 +7,13 @@ class TicketsService{
 
   async getMyTickets(){
     const response = await api.get('account/tickets')
-    AppState.tickets = response.data.map(obj => new Ticket(obj))
+    AppState.myTickets = response.data.map(obj => new Ticket(obj))
   }
 
   async deleteTicket(ticketId){
     const response = await api.delete(`api/tickets/${ticketId}`)
     logger.log('[TICKET SERVICE] DELETED TICKET: ', response.data)
-    AppState.tickets = AppState.tickets.filter(ticket => ticket.id != ticketId)
+    AppState.myTickets = AppState.myTickets.filter(ticket => ticket.id != ticketId)
   }
 
   async getTicketsByEventId(eventId){
