@@ -2,7 +2,7 @@
   <router-link :to="{name: 'EventDetails', params: {eventId: towerEvent.id}}">
     <div class="card">
       <img class="img-fluid" :src="towerEvent.coverImg" :title="towerEvent.name" :alt="towerEvent.name">
-      <div v-if="towerEvent.isCanceled" class="mt-1 d-flex">
+      <div v-if="towerEvent.isCanceled" class="mt-1">
         <s class="p-2">{{ towerEvent.name }}</s>
         <p class="text-danger p-2">Cancelled</p>
       </div>
