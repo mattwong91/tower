@@ -1,5 +1,13 @@
 <template>
 <div v-if="account.id" class="container-fluid">
+
+  <section class="row my-4 justify-content-center">
+    <div class="col-12 d-flex flex-column justify-content-center align-items-center">
+      <img :src="account.picture" :alt="account.name" class="profile-img rounded-circle">
+      <p class="fw-semibold my-2">{{ account.name }}</p>
+      <p>{{ myTowerEvents.length }} Events | {{ myTickets.length }} Tickets</p>
+    </div>
+  </section>
   <!-- SECTION MY EVENTS TO ATTEND -->
   <section v-if="myTowerEvents" class="row my-2">
     <h2>My Events</h2>
@@ -68,5 +76,11 @@ export default {
 <style scoped>
 p{
   margin-bottom: 0;
+}
+
+.profile-img{
+  aspect-ratio: 1/1;
+  width: 10rem;
+  height: 10rem;
 }
 </style>
