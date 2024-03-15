@@ -2,8 +2,7 @@
   <nav class="navbar navbar-expand-lg navbar-dark bg-main px-3">
     <router-link class="navbar-brand d-flex" :to="{ name: 'Home' }">
       <div class="d-flex flex-column align-items-center">
-        <!-- TODO CHANGE TO A LOGO -->
-        <h1 class="title">Tower</h1>
+        <img src="/src/assets/img/tower-logo.png" alt="tower logo" class="logo">
       </div>
     </router-link>
     
@@ -49,9 +48,9 @@ a:hover {
 .bg-main{
   background-color: #094567;
 }
-.title:hover{
-  text-shadow: 0px 0px 10px black;
-  transition: ease-in-out 0.3s;
+
+.logo{
+  height: 64px;
 }
 
 @media screen and (min-width: 768px) {
