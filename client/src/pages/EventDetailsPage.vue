@@ -45,7 +45,10 @@
   <!-- !SECTION EVENT DETAIL CARD -->
 
   <!-- SECTION USERS THAT ARE ATTENDING -->
-  <section v-if="tickets.length != 0" class="row px-3 px-md-5 justify-content-center">
+  <section v-if="tickets.length" class="row px-3 px-md-5 justify-content-center">
+    <div class="col-12 d-flex justify-content-center fs-4 fw-semibold">
+      <p>Attendees</p>
+    </div>
     <div class="col-12 col-md-10 col-xl-6 bg-dark rounded d-flex">
       <section class="row">
         <div v-for="ticket in tickets" :key="ticket.id" class="col-auto p-2">
