@@ -1,13 +1,11 @@
 <template>
   <router-link :to="{name: 'EventDetails', params: {eventId: towerEvent.id}}">
-    <div class="card">
+    <div class="card position-relative my-2">
       <img class="img-fluid" :src="towerEvent.coverImg" :title="towerEvent.name" :alt="towerEvent.name">
-      <div v-if="towerEvent.isCanceled" class="mt-1">
-        <s class="p-2">{{ towerEvent.name }}</s>
-        <p class="text-danger p-2">Cancelled</p>
-      </div>
-      <div v-else class="mt-1">
-        <p class="p-2">{{ towerEvent.name }}</p>
+      <s v-if="towerEvent.isCanceled" class="p-2">{{ towerEvent.name }}</s>
+      <p v-else class="p-2">{{ towerEvent.name }}</p>
+      <div v-if="towerEvent.isCanceled" class="p-2 position-absolute top-0 start-50 badge bg-danger translate-middle">
+        Cancelled
       </div>
     </div>
   </router-link>
