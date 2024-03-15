@@ -8,16 +8,16 @@
 
   <!-- SECTION FILTER BAR -->
   <section class="row p-3 mt-3">
-    <div class="col-12 bg-main rounded">
+    <div class="col-12">
       <section class="row justify-content-around">
-        <div class="col-12 col-md-2">
-          <button @click="filterType('')" class="btn btn-light w-100 my-2 mx-md-2">ALL</button>
-        </div>
-        <div v-for="eventType in eventTypes" :key="eventType" class="col-12 col-md-2">
-          <button @click="filterType(eventType)" class="btn btn-light w-100 my-2 mx-md-2">
-            {{ eventType.toUpperCase() }}
-          </button>
-        </div>
+        <ul class="nav nav-pills justify-content-center">
+          <li class="nav-item p-1" ><button @click="filterType('')" class="nav-link">ALL</button></li>
+          <li v-for="eventType in eventTypes" :key="eventType" class="nav-item p-1">
+            <button @click="filterType(eventType)" class="nav-link">
+              {{ eventType.toUpperCase() }}
+            </button>
+          </li>
+        </ul>
       </section>
     </div>
   </section>
@@ -85,6 +85,11 @@ img{
 }
 
 .bg-main{
+  background-color: #094567;
+}
+
+.nav-link{
+  color:white;
   background-color: #094567;
 }
 </style>
