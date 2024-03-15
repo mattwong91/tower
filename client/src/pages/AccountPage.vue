@@ -5,7 +5,11 @@
     <div class="col-12 d-flex flex-column justify-content-center align-items-center">
       <img :src="account.picture" :alt="account.name" class="profile-img rounded-circle">
       <p class="fw-semibold my-2">{{ account.name }}</p>
-      <p>{{ myTowerEvents.length }} Events | {{ myTickets.length }} Tickets</p>
+      <p>
+        <span class="badge bg-info">{{ myTowerEvents.length }} Events</span>
+        <span> | </span>
+        <span class="badge bg-warning">{{ myTickets.length }} Tickets</span>
+      </p>
     </div>
   </section>
   <!-- SECTION MY EVENTS TO ATTEND -->
