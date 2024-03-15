@@ -94,4 +94,9 @@ img{
   color:white;
   background-color: #094567;
 }
+
+.nav-link:hover{
+  box-shadow: 0px 0px 7px rgb(40, 40, 40);
+  transition: ease-in-out 0.25s;
+}
 </style>
