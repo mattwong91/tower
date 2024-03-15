@@ -37,4 +37,9 @@ p{
   box-shadow: 0px 0px 7px rgb(40, 40, 40);
   transition: ease-in-out 0.25s;
 }
+
+.card > img{
+  border-top-left-radius: .375rem;
+  border-top-right-radius: .375rem;
+}
 </style>
